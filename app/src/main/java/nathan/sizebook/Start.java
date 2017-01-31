@@ -15,4 +15,9 @@ public class Start extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
     }
+
+    public void enterFields(View view) {
+        Intent intent = new Intent(this, enterData.class);
+        startActivity(intent);
+    }
 }

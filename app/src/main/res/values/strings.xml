@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">SizeBook</string>
+    <string name="enterName">Name</string>
+    <string name="enterDate">Date</string>
+    <string name="enterNeck">Neck Measurements</string>
+    <string name="enterBust">Bust Measurements</string>
+    <string name="enterChest">Chest Measurements</string>
+    <string name="enterWaist">Waist Measurements</string>
+    <string name="enterHip">Hip Measurements</string>
+    <string name="enterInseam">Inseam Measurements</string>
+    <string name="enterComment">Additional Comments</string>
+    <string name="Confirm">Confirm</string>
 </resources>
