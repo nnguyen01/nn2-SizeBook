@@ -34,8 +34,6 @@ public class EnterData extends AppCompatActivity {
     }
 
     public void confirmButton(View view) {
-
-
         String Name = userNameText.getText().toString();
         String Date = userDateText.getText().toString();
         float Neck = Float.valueOf(userNeckText.getText().toString());
@@ -46,7 +44,8 @@ public class EnterData extends AppCompatActivity {
         String Comments = userCommentText.getText().toString();
 
         person = new Person(Name, Date, Neck, Bust, Chest, Hip, Inseam, Comments);
-        Intent intent = new Intent(this, Main.class);
-        startActivity(intent);
+        finish();
+        //Intent intent = new Intent(this, Main.class);
+        //startActivity(intent);
     }
 }
