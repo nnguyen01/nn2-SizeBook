@@ -1,14 +1,13 @@
 package nathan.sizebook;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import java.util.Date;
-
-public class EnterData extends AppCompatActivity {
+public class GetData extends AppCompatActivity {
     EditText userNameText;
     EditText userDateText;
     EditText userNeckText;
@@ -44,6 +43,9 @@ public class EnterData extends AppCompatActivity {
         String Comments = userCommentText.getText().toString();
 
         person = new Person(Name, Date, Neck, Bust, Chest, Hip, Inseam, Comments);
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("data", person);
+        setResult(Activity.RESULT_OK, resultIntent);
         finish();
         //Intent intent = new Intent(this, Main.class);
         //startActivity(intent);

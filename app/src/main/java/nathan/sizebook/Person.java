@@ -2,6 +2,7 @@ package nathan.sizebook;
 
 import android.app.DownloadManager;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.jar.Attributes;
 
@@ -9,7 +10,7 @@ import java.util.jar.Attributes;
  * Created by nathan on 31/01/17.
  */
 
-public class Person {
+public class Person implements Serializable{
     private String name;
     private String date;
     private float neck;
