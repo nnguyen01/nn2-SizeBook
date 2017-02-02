@@ -1,10 +1,6 @@
 package nathan.sizebook;
 
-import android.app.DownloadManager;
-
 import java.io.Serializable;
-import java.util.Date;
-import java.util.jar.Attributes;
 
 /**
  * Created by nathan on 31/01/17.
