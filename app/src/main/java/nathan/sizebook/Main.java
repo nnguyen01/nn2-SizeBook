@@ -84,8 +84,10 @@ public class Main extends AppCompatActivity {
             Type listType = new TypeToken<ArrayList<Person>>(){}.getType();
             personList = gson.fromJson(in, listType);
 
+            //Log.d("tag", personList.get(0));
+
             Log.d("tag", personList.toString());
-            Log.d("tag", "hello");
+            //Log.d("tag", "hello");
 
 
         } catch (FileNotFoundException e) {

@@ -27,6 +27,13 @@ public class Person implements Serializable{
         this.comments = comments;
     }
 
+
+    // Ask Eddy to explain this to you later
+    @Override
+    public String toString() {
+        return date.toString() + "\n" + this.name;
+    }
+
     public String getName() {
         return name;
     }
