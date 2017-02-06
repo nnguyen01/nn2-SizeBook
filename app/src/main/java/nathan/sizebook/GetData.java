@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+/**
+ * When the user pressed the *plus* button
+ * this class is utilized to get the data
+ * the user has inputted.
+ */
 public class GetData extends AppCompatActivity {
     EditText userNameText;
     EditText userDateText;
@@ -18,6 +23,11 @@ public class GetData extends AppCompatActivity {
     EditText userCommentText;
     Person person;
 
+    /**
+     * Sets up the variables with casting to editText
+     * to ensure that there are no data input violations.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +43,12 @@ public class GetData extends AppCompatActivity {
         userCommentText = (EditText) findViewById(R.id.edit_Comment);
     }
 
+    /**
+     * Makes a person object and passes the object to main.
+     * Sets the result code to 1 so that onActivityResult knows
+     * it was successful.
+     * @param view
+     */
     public void confirmButton(View view) {
         String Name = userNameText.getText().toString();
         String Date = userDateText.getText().toString();

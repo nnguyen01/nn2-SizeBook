@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 
 /**
- * Created by nathan on 05/02/17.
+ * The same as GetData in which it opens up a menu where
+ * the user can input data values. However, unlike GetData,
+ * it pre-populates the data with the values of the person
+ * that was clicked on.
  */
 public class ViewPerson extends AppCompatActivity{
 
@@ -21,6 +24,12 @@ public class ViewPerson extends AppCompatActivity{
     EditText editInseam;
     EditText editComment;
 
+    /**
+     * Gets the data from the person object which
+     * the user clicked on and then populates each field
+     * with respective data.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +77,11 @@ public class ViewPerson extends AppCompatActivity{
         editComment.setText(comment);
     }
 
+    /**
+     * Sets the resultCode to 0 which main interprets
+     * as the user deleting one of the entries.
+     * @param view
+     */
     public void deleteButton(View view) {
         Intent intent = getIntent();
         Intent resultIntent = new Intent();
@@ -80,6 +94,13 @@ public class ViewPerson extends AppCompatActivity{
         finish();
     }
 
+    /**
+     * Almost exactly the same as confirmButton in
+     * GetData except this also returns the position of
+     * the entry clicked on so that it can replace the data
+     * without making a new entry.
+     * @param view
+     */
     public void confirmButton(View view) {
 
         Intent intent = getIntent();

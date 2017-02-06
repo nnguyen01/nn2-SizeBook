@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="1000"
-        android:inputType="textEmailAddress|textEmailSubject|numberDecimal|numberSigned"
+        android:inputType="textEmailAddress|textEmailSubject"
         android:layout_below="@id/edit_Name"
         android:hint="@string/enterDate" />
 
@@ -76,7 +76,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="1000"
-        android:inputType="textEmailAddress|textEmailSubject"
         android:layout_below="@id/edit_Comment"
         android:hint="@string/enterComment"/>
 

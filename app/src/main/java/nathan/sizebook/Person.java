@@ -6,6 +6,11 @@ import java.io.Serializable;
  * Created by nathan on 31/01/17.
  */
 
+/**
+ * This class is used for the bulk of the program to make entries
+ * and to keep track of the data per entry that the user
+ * inputs.
+ */
 public class Person implements Serializable {
     private String name;
     private String date;
@@ -17,6 +22,18 @@ public class Person implements Serializable {
     private float inseam;
     private String comments;
 
+    /**
+     * Person constructor.
+     * @param name
+     * @param date
+     * @param neck
+     * @param bust
+     * @param chest
+     * @param waist
+     * @param hip
+     * @param inseam
+     * @param comments
+     */
     public Person(String name, String date, float neck, float bust, float chest, float waist, float hip, float inseam, String comments) {
         this.name = name;
         this.date = date;
@@ -29,6 +46,9 @@ public class Person implements Serializable {
         this.comments = comments;
     }
 
+    /**
+     * Getters and Setters
+     */
     @Override
     public String toString() {
         return date.toString() + "\n" + this.name;

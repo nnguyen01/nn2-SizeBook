@@ -22,6 +22,9 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * Main activity
+ */
 public class Main extends AppCompatActivity {
 
     private static final String FILENAME = "file.sav";
@@ -31,6 +34,11 @@ public class Main extends AppCompatActivity {
     public static final int CONFIRM = 1;
     public static final int DELETE = 0;
 
+    /**
+     * Starts the app and initializes a listview
+     * of the people entries if such entries existed before.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +46,23 @@ public class Main extends AppCompatActivity {
         oldpersonList = (ListView) findViewById(R.id.oldpersonList);
     }
 
+    /**
+     * New entry method when the user clicks the
+     * *plus* button and looks to make a new data entry.
+     * Goes the GetData class to get the user data.
+     * @param view
+     */
     public void newEntry(View view) {
         Intent intent = new Intent(this, GetData.class);
         startActivityForResult(intent, 1);
     }
 
+    /**
+     * Used to view and edit data. Passes the position
+     * where the user clicked the entry as well as the
+     * person object to the ViewPerson class.
+     * @param view
+     */
     public void seeData(View view) {
 
         ListView viewList = (ListView) view.getParent();
@@ -56,6 +76,11 @@ public class Main extends AppCompatActivity {
         startActivityForResult(intent, 2);
     }
 
+    /**
+     * When the user completes and activity, onStart
+     * is used to reload the person entries and set the
+     * adapter.
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -68,6 +93,16 @@ public class Main extends AppCompatActivity {
         oldpersonList.setAdapter(adapter);
     }
 
+    /**
+     * When the user is finished making a new entry
+     * or if the user deletes or edits an entry, this function
+     * adds a person to the ArrayList of people or deletes or edits
+     * the person the the user clicked on.
+     * Used to get the results passed from GetData and ViewPerson.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
@@ -107,6 +142,10 @@ public class Main extends AppCompatActivity {
         }
     }
 
+    /**
+     * Converts from Json to be read and displayed
+     * on the main app screen from a file.
+     */
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);
@@ -123,6 +162,10 @@ public class Main extends AppCompatActivity {
         }
     }
 
+    /**
+     * Converts to Json to be stored to a file
+     * for saving and later viewing and loading.
+     */
     private void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME,
