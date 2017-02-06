@@ -124,7 +124,8 @@ public class ViewPerson extends AppCompatActivity{
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
-        boolean flag = false;
+        int flag = 0;
+        boolean create = true;
 
         String userName = editName.getText().toString();
         String userDate = editDate.getText().toString();
@@ -142,75 +143,77 @@ public class ViewPerson extends AppCompatActivity{
         try { userNeck = Float.valueOf(editNeck.getText().toString()); }
         catch (NumberFormatException e) {
             if (editNeck.getText().toString().isEmpty()) {}
-            else {flag = true;}
+            else {
+                flag = 3;
+                create = false;
+            }
         };
 
         try { userBust = Float.valueOf(editBust.getText().toString()); }
         catch (NumberFormatException e) {
             if (editBust.getText().toString().isEmpty()) {}
-            else {flag = true;}
+            else {
+                flag = 3;
+                create = false;
+            }
         };
 
         try { userChest = Float.valueOf(editChest.getText().toString()); }
         catch (NumberFormatException e) {
             if (editChest.getText().toString().isEmpty()) {}
-            else {flag = true;}
+            else {
+                flag = 3;
+                create = false;
+            }
         };
 
         try { userWaist = Float.valueOf(editWaist.getText().toString()); }
         catch (NumberFormatException e) {
             if (editWaist.getText().toString().isEmpty()) {}
-            else {flag = true;}
+            else {
+                flag = 3;
+                create = false;
+            }
         };
 
         try { userHip = Float.valueOf(editHip.getText().toString()); }
         catch (NumberFormatException e) {
             if (editHip.getText().toString().isEmpty()) {}
-            else {flag = true;}
+            else {
+                flag = 3;
+                create = false;
+            }
         };
 
         try { userInseam = Float.valueOf(editInseam.getText().toString()); }
         catch (NumberFormatException e) {
             if (editInseam.getText().toString().isEmpty()) {}
-            else {flag = true;}
+            else {
+                flag = 3;
+                create = false;
+            }
         };
 
         String Comments = editComment.getText().toString();
 
         if (userName.isEmpty()) {
-            TextView textview = (TextView) findViewById(R.id.invalid);
-            textview.setText("Invalid Name");
-            return;
+            flag = 1;
+            create = false;
         }
         else if (!userDate.isEmpty()) {
-            System.out.println("2");
             SimpleDateFormat check = new SimpleDateFormat("yyyy-MM-dd");
             check.setLenient(false);
 
             try {
                 Date date = check.parse(userDate);
-
-                person = new Person(userName, userDate, userNeck, userBust, userChest, userWaist, userHip, userInseam, Comments);
-                int position = (int) b.getSerializable("pos");
-
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("data", person);
-                resultIntent.putExtra("pos", position);
-
-                setResult(2, resultIntent);
-                finish();
             } catch (ParseException e) {
                 e.printStackTrace();
-                TextView textview = (TextView) findViewById(R.id.invalid);
-                textview.setText("Invalid Date");
+                flag = 2;
+                create = false;
             }
         }
-        else if (flag) {
-            TextView textview = (TextView) findViewById(R.id.invalid);
-            textview.setText("Invalid Entry");
-            return;
-        }
-        else {
+
+        if (create) {
             person = new Person(userName, userDate, userNeck, userBust, userChest, userWaist, userHip, userInseam, Comments);
             Intent resultIntent = new Intent();
             resultIntent.putExtra("data", person);
@@ -220,6 +223,20 @@ public class ViewPerson extends AppCompatActivity{
             resultIntent.putExtra("pos", position);
             setResult(2, resultIntent);
             finish();
+        }
+        else {
+            if (flag == 1) {
+                TextView textview = (TextView) findViewById(R.id.invalid);
+                textview.setText("Invalid Name");
+            }
+            else if (flag == 2) {
+                TextView textview = (TextView) findViewById(R.id.invalid);
+                textview.setText("Invalid Date");
+            }
+            else if (flag == 3) {
+                TextView textview = (TextView) findViewById(R.id.invalid);
+                textview.setText("Invalid Entry");
+            }
         }
     }
 }

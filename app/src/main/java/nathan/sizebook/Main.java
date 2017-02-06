@@ -33,7 +33,7 @@ public class Main extends AppCompatActivity {
     public static final int DELETE = 1;
     private ArrayList<Person> personList;
     private ArrayAdapter<Person> adapter;
-    private ListView oldpersonList;
+    private ListView listview;
 
     /**
      * Starts the app and initializes a listview
@@ -44,7 +44,7 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        oldpersonList = (ListView) findViewById(R.id.oldpersonList);
+        listview = (ListView) findViewById(R.id.listview);
     }
 
     /**
@@ -96,7 +96,7 @@ public class Main extends AppCompatActivity {
         adapter = new ArrayAdapter<Person>(this,
                 R.layout.list_person, R.id.list, personList);
 
-        oldpersonList.setAdapter(adapter);
+        listview.setAdapter(adapter);
     }
 
     /**

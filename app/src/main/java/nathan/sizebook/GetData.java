@@ -25,7 +25,7 @@ public class GetData extends AppCompatActivity {
     private EditText userHipText;
     private EditText userInseamText;
     private EditText userCommentText;
-    Person person;
+    private Person person;
 
     /**
      * Sets up the variables with casting to editText
@@ -54,7 +54,8 @@ public class GetData extends AppCompatActivity {
      * @param view
      */
     public void confirmButton(View view) {
-        boolean flag = false;
+        int flag = 0;
+        boolean create = true;
 
         String Name = userNameText.getText().toString();
         String userDate = userDateText.getText().toString();
@@ -71,78 +72,96 @@ public class GetData extends AppCompatActivity {
         try { Neck = Float.valueOf(userNeckText.getText().toString()); }
         catch (NumberFormatException e) {
             if (userNeckText.getText().toString().isEmpty()) {}
-            else {flag = true;}
+            else {
+                flag = 3;
+                create = false;
+            }
         };
 
         try { Bust = Float.valueOf(userBustText.getText().toString()); }
         catch (NumberFormatException e) {
             if (userBustText.getText().toString().isEmpty()) {}
-            else {flag = true;}
+            else {
+                flag = 3;
+                create = false;
+            }
         };
 
         try { Chest = Float.valueOf(userChestText.getText().toString()); }
         catch (NumberFormatException e) {
             if (userChestText.getText().toString().isEmpty()) {}
-            else {flag = true;}
+            else {
+                flag = 3;
+                create = false;
+            }
         };
 
         try { Waist = Float.valueOf(userWaistText.getText().toString()); }
         catch (NumberFormatException e) {
             if (userWaistText.getText().toString().isEmpty()) {}
-            else {flag = true;}
+            else {
+                flag = 3;
+                create = false;
+            }
         };
 
         try { Hip = Float.valueOf(userHipText.getText().toString()); }
         catch (NumberFormatException e) {
             if (userHipText.getText().toString().isEmpty()) {}
-            else { flag = true; }
+            else {
+                flag = 3;
+                create = false;
+            }
         };
 
         try { Inseam = Float.valueOf(userInseamText.getText().toString()); }
         catch (NumberFormatException e) {
             if (userInseamText.getText().toString().isEmpty()) {}
-            else {flag = true;}
+            else {
+                flag = 3;
+                create = false;
+            }
         };
 
         String Comments = userCommentText.getText().toString();
 
         if (Name.isEmpty()) {
-            System.out.println("1");
-            TextView textview = (TextView) findViewById(R.id.invalid);
-            textview.setText("Invalid Name");
-            return;
+            flag = 1;
+            create = false;
         }
         else if (!userDate.isEmpty()) {
-            System.out.println("2");
             SimpleDateFormat check = new SimpleDateFormat("yyyy-MM-dd");
             check.setLenient(false);
 
             try {
                 Date date = check.parse(userDate);
-                person = new Person(Name, userDate, Bust, Neck, Chest, Waist, Hip, Inseam, Comments);
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("data", person);
-                setResult(2, resultIntent);
-                finish();
+
             } catch (ParseException e) {
                 e.printStackTrace();
-                TextView textview = (TextView) findViewById(R.id.invalid);
-                textview.setText("Invalid Date");
+                flag = 2;
+                create = false;
             }
         }
-
-        else if (flag) {
-            System.out.println("3");
-            TextView textview = (TextView) findViewById(R.id.invalid);
-            textview.setText("Invalid Entry");
-            return;
-        }
-        else {
+        if (create) {
             person = new Person(Name, userDate, Bust, Neck, Chest, Waist, Hip, Inseam, Comments);
             Intent resultIntent = new Intent();
             resultIntent.putExtra("data", person);
             setResult(2, resultIntent);
             finish();
+        }
+        else {
+            if (flag == 1) {
+                TextView textview = (TextView) findViewById(R.id.invalid);
+                textview.setText("Invalid Name");
+            }
+            else if (flag == 2) {
+                TextView textview = (TextView) findViewById(R.id.invalid);
+                textview.setText("Invalid Date");
+            }
+            else if (flag == 3) {
+                TextView textview = (TextView) findViewById(R.id.invalid);
+                textview.setText("Invalid Entry");
+            }
         }
     }
 }

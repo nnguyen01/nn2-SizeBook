@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SizeBook</string>
+    <string name="app_name">nn2-SizeBook</string>
     <string name="enterName">Name</string>
     <string name="enterDate">Date</string>
     <string name="enterNeck">Neck Measurements</string>

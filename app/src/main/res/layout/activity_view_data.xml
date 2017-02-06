@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="1000"
-        android:inputType="textEmailAddress|textEmailSubject|numberDecimal|numberSigned"
+        android:inputType="textEmailAddress|textEmailSubject|numberDecimal"
         android:layout_below="@id/edit_Name"
         android:hint="@string/enterDate" />
 
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="1000"
-        android:inputType="textEmailAddress|textEmailSubject|numberDecimal|numberSigned"
+        android:inputType="textEmailAddress|textEmailSubject|numberDecimal"
         android:layout_below="@id/edit_Date"
         android:hint="@string/enterNeck" />
 
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="1000"
-        android:inputType="textEmailAddress|textEmailSubject|numberDecimal|numberSigned"
+        android:inputType="textEmailAddress|textEmailSubject|numberDecimal"
         android:layout_below="@id/edit_Neck"
         android:hint="@string/enterBust" />
 
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="1000"
-        android:inputType="textEmailAddress|textEmailSubject|numberDecimal|numberSigned"
+        android:inputType="textEmailAddress|textEmailSubject|numberDecimal"
         android:layout_below="@id/edit_Bust"
         android:hint="@string/enterChest" />
 
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="1000"
-        android:inputType="textEmailAddress|textEmailSubject|numberDecimal|numberSigned"
+        android:inputType="textEmailAddress|textEmailSubject|numberDecimal"
         android:layout_below="@id/edit_Chest"
         android:hint="@string/enterWaist" />
 
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="1000"
-        android:inputType="textEmailAddress|textEmailSubject|numberDecimal|numberSigned"
+        android:inputType="textEmailAddress|textEmailSubject|numberDecimal"
         android:layout_below="@id/edit_Waist"
         android:hint="@string/enterHip" />
 
