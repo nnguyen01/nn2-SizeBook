@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * The same as GetData in which it opens up a menu where
  * the user can input data values. However, unlike GetData,
@@ -15,15 +19,16 @@ import android.widget.TextView;
  */
 public class ViewPerson extends AppCompatActivity{
 
-    EditText editName;
-    EditText editDate;
-    EditText editNeck;
-    EditText editBust;
-    EditText editChest;
-    EditText editWaist;
-    EditText editHip;
-    EditText editInseam;
-    EditText editComment;
+    private EditText editName;
+    private EditText editDate;
+    private EditText editNeck;
+    private EditText editBust;
+    private EditText editChest;
+    private EditText editWaist;
+    private EditText editHip;
+    private EditText editInseam;
+    private EditText editComment;
+    private Person person;
 
     /**
      * Gets the data from the person object which
@@ -46,8 +51,8 @@ public class ViewPerson extends AppCompatActivity{
         editName.setText(name);
 
         editDate = (EditText) findViewById(R.id.edit_Date);
-        String date = person.getDate();
-        editDate.setText(date);
+        String Date = person.getDate();
+        editDate.setText(Date);
 
         editNeck = (EditText) findViewById(R.id.edit_Neck);
         float neck = person.getNeck();
@@ -106,53 +111,53 @@ public class ViewPerson extends AppCompatActivity{
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        boolean flag;
-        flag = false;
-        String Name = editName.getText().toString();
-        String Date = editDate.getText().toString();
 
-        System.out.println(Name);
+        boolean flag = false;
+
+        String userName = editName.getText().toString();
+        String userDate = editDate.getText().toString();
+
 
         // Instantiates all values so that
         // person object is valid
-        float Bust = 0;
-        float Neck = 0;
-        float Chest = 0;
-        float Waist = 0;
-        float Hip = 0;
-        float Inseam = 0;
+        float userNeck = 0;
+        float userBust = 0;
+        float userChest = 0;
+        float userWaist = 0;
+        float userHip = 0;
+        float userInseam = 0;
 
-        try { Neck = Float.valueOf(editNeck.getText().toString()); }
+        try { userNeck = Float.valueOf(editNeck.getText().toString()); }
         catch (NumberFormatException e) {
             if (editNeck.getText().toString().isEmpty()) {}
             else {flag = true;}
         };
 
-        try { Bust = Float.valueOf(editBust.getText().toString()); }
+        try { userBust = Float.valueOf(editBust.getText().toString()); }
         catch (NumberFormatException e) {
             if (editBust.getText().toString().isEmpty()) {}
             else {flag = true;}
         };
 
-        try { Chest = Float.valueOf(editChest.getText().toString()); }
+        try { userChest = Float.valueOf(editChest.getText().toString()); }
         catch (NumberFormatException e) {
             if (editChest.getText().toString().isEmpty()) {}
             else {flag = true;}
         };
 
-        try { Waist = Float.valueOf(editWaist.getText().toString()); }
+        try { userWaist = Float.valueOf(editWaist.getText().toString()); }
         catch (NumberFormatException e) {
             if (editWaist.getText().toString().isEmpty()) {}
             else {flag = true;}
         };
 
-        try { Hip = Float.valueOf(editHip.getText().toString()); }
+        try { userHip = Float.valueOf(editHip.getText().toString()); }
         catch (NumberFormatException e) {
             if (editHip.getText().toString().isEmpty()) {}
             else {flag = true;}
         };
 
-        try { Inseam = Float.valueOf(editInseam.getText().toString()); }
+        try { userInseam = Float.valueOf(editInseam.getText().toString()); }
         catch (NumberFormatException e) {
             if (editInseam.getText().toString().isEmpty()) {}
             else {flag = true;}
@@ -160,10 +165,33 @@ public class ViewPerson extends AppCompatActivity{
 
         String Comments = editComment.getText().toString();
 
-        if (Name.isEmpty()) {
+        if (userName.isEmpty()) {
             TextView textview = (TextView) findViewById(R.id.invalid);
             textview.setText("Invalid Name");
             return;
+        }
+        else if (!userDate.isEmpty()) {
+            System.out.println("2");
+            SimpleDateFormat check = new SimpleDateFormat("yyyy-MM-dd");
+            check.setLenient(false);
+
+            try {
+                Date date = check.parse(userDate);
+
+                person = new Person(userName, userDate, userNeck, userBust, userWaist, userChest, userHip, userInseam, Comments);
+                int position = (int) b.getSerializable("pos");
+
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("data", person);
+                resultIntent.putExtra("pos", position);
+
+                setResult(2, resultIntent);
+                finish();
+            } catch (ParseException e) {
+                e.printStackTrace();
+                TextView textview = (TextView) findViewById(R.id.invalid);
+                textview.setText("Invalid Date");
+            }
         }
         else if (flag) {
             TextView textview = (TextView) findViewById(R.id.invalid);
@@ -171,7 +199,7 @@ public class ViewPerson extends AppCompatActivity{
             return;
         }
         else {
-            Person person = new Person(Name, Date, Neck, Bust, Waist, Chest, Hip, Inseam, Comments);
+            Person person = new Person(userName, userDate, userNeck, userBust, userWaist, userChest, userHip, userInseam, Comments);
             Intent resultIntent = new Intent();
             resultIntent.putExtra("data", person);
 

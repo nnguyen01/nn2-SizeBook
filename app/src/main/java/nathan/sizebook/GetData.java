@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * When the user pressed the *plus* button
@@ -13,15 +16,15 @@ import android.widget.TextView;
  * the user has inputted.
  */
 public class GetData extends AppCompatActivity {
-    EditText userNameText;
-    EditText userDateText;
-    EditText userNeckText;
-    EditText userBustText;
-    EditText userChestText;
-    EditText userWaistText;
-    EditText userHipText;
-    EditText userInseamText;
-    EditText userCommentText;
+    private EditText userNameText;
+    private EditText userDateText;
+    private EditText userNeckText;
+    private EditText userBustText;
+    private EditText userChestText;
+    private EditText userWaistText;
+    private EditText userHipText;
+    private EditText userInseamText;
+    private EditText userCommentText;
     Person person;
 
     /**
@@ -51,12 +54,10 @@ public class GetData extends AppCompatActivity {
      * @param view
      */
     public void confirmButton(View view) {
-        boolean flag;
-        flag = false;
-        String Name = userNameText.getText().toString();
-        String Date = userDateText.getText().toString();
+        boolean flag = false;
 
-        System.out.println(Name);
+        String Name = userNameText.getText().toString();
+        String userDate = userDateText.getText().toString();
 
         // Instantiates all values so that
         // person object is valid
@@ -94,7 +95,7 @@ public class GetData extends AppCompatActivity {
         try { Hip = Float.valueOf(userHipText.getText().toString()); }
         catch (NumberFormatException e) {
             if (userHipText.getText().toString().isEmpty()) {}
-            else {flag = true;}
+            else { flag = true; }
         };
 
         try { Inseam = Float.valueOf(userInseamText.getText().toString()); }
@@ -106,17 +107,38 @@ public class GetData extends AppCompatActivity {
         String Comments = userCommentText.getText().toString();
 
         if (Name.isEmpty()) {
+            System.out.println("1");
             TextView textview = (TextView) findViewById(R.id.invalid);
             textview.setText("Invalid Name");
             return;
         }
+        else if (!userDate.isEmpty()) {
+            System.out.println("2");
+            SimpleDateFormat check = new SimpleDateFormat("yyyy-MM-dd");
+            check.setLenient(false);
+
+            try {
+                Date date = check.parse(userDate);
+                person = new Person(Name, userDate, Neck, Bust, Waist, Chest, Hip, Inseam, Comments);
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("data", person);
+                setResult(2, resultIntent);
+                finish();
+            } catch (ParseException e) {
+                e.printStackTrace();
+                TextView textview = (TextView) findViewById(R.id.invalid);
+                textview.setText("Invalid Date");
+            }
+        }
+
         else if (flag) {
+            System.out.println("3");
             TextView textview = (TextView) findViewById(R.id.invalid);
             textview.setText("Invalid Entry");
             return;
         }
         else {
-            person = new Person(Name, Date, Neck, Bust, Waist, Chest, Hip, Inseam, Comments);
+            person = new Person(Name, userDate, Neck, Bust, Waist, Chest, Hip, Inseam, Comments);
             Intent resultIntent = new Intent();
             resultIntent.putExtra("data", person);
             setResult(2, resultIntent);

@@ -127,7 +127,12 @@ public class Main extends AppCompatActivity {
             if (resultCode == CONFIRM) {
                 Bundle b = data.getExtras();
 
+
+                //System.out.println(b);
                 Person person = (Person) b.getSerializable("data");
+
+                //System.out.println(b.getSerializable("pos"));
+
                 int position = (int) b.getSerializable("pos");
 
                 personList.set(position, person);
