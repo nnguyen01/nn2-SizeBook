@@ -28,14 +28,14 @@ public class Main extends AppCompatActivity {
     private ArrayList<Person> personList;
     private ArrayAdapter<Person> adapter;
     private ListView oldpersonList;
+    public static final int CONFIRM = 1;
+    public static final int DELETE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         oldpersonList = (ListView) findViewById(R.id.oldpersonList);
-
-        //deleteFile(FILENAME);
     }
 
     public void newEntry(View view) {
@@ -71,7 +71,7 @@ public class Main extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
+            if (resultCode == CONFIRM) {
                 Bundle b = data.getExtras();
 
                 Person person = (Person) b.getSerializable("data");
@@ -83,13 +83,23 @@ public class Main extends AppCompatActivity {
             }
         }
         if (requestCode == 2) {
-            if (resultCode == RESULT_OK) {
+            if (resultCode == CONFIRM) {
                 Bundle b = data.getExtras();
 
                 Person person = (Person) b.getSerializable("data");
                 int position = (int) b.getSerializable("pos");
 
                 personList.set(position, person);
+                adapter.notifyDataSetChanged();
+
+                saveInFile();
+            }
+            if (resultCode == DELETE) {
+                Bundle b = data.getExtras();
+
+                int position = (int) b.getSerializable("pos");
+
+                personList.remove(position);
                 adapter.notifyDataSetChanged();
 
                 saveInFile();

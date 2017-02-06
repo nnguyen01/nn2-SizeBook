@@ -1,6 +1,5 @@
 package nathan.sizebook;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,7 +47,7 @@ public class GetData extends AppCompatActivity {
         person = new Person(Name, Date, Neck, Bust, Waist, Chest, Hip, Inseam, Comments);
         Intent resultIntent = new Intent();
         resultIntent.putExtra("data", person);
-        setResult(Activity.RESULT_OK, resultIntent);
+        setResult(1, resultIntent);
         finish();
     }
 }

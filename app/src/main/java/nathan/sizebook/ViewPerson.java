@@ -1,6 +1,5 @@
 package nathan.sizebook;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +24,7 @@ public class ViewPerson extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enter_data);
+        setContentView(R.layout.activity_view_data);
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -69,6 +68,18 @@ public class ViewPerson extends AppCompatActivity{
         editComment.setText(comment);
     }
 
+    public void deleteButton(View view) {
+        Intent intent = getIntent();
+        Intent resultIntent = new Intent();
+        Bundle b = intent.getExtras();
+
+        int position = (int) b.getSerializable("pos");
+
+        resultIntent.putExtra("pos", position);
+        setResult(0, resultIntent);
+        finish();
+    }
+
     public void confirmButton(View view) {
 
         Intent intent = getIntent();
@@ -91,7 +102,7 @@ public class ViewPerson extends AppCompatActivity{
         int position = (int) b.getSerializable("pos");
 
         resultIntent.putExtra("pos", position);
-        setResult(Activity.RESULT_OK, resultIntent);
+        setResult(1, resultIntent);
         finish();
     }
 }
