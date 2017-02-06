@@ -119,7 +119,7 @@ public class GetData extends AppCompatActivity {
 
             try {
                 Date date = check.parse(userDate);
-                person = new Person(Name, userDate, Neck, Bust, Waist, Chest, Hip, Inseam, Comments);
+                person = new Person(Name, userDate, Bust, Neck, Chest, Waist, Hip, Inseam, Comments);
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("data", person);
                 setResult(2, resultIntent);
@@ -138,7 +138,7 @@ public class GetData extends AppCompatActivity {
             return;
         }
         else {
-            person = new Person(Name, userDate, Neck, Bust, Waist, Chest, Hip, Inseam, Comments);
+            person = new Person(Name, userDate, Bust, Neck, Chest, Waist, Hip, Inseam, Comments);
             Intent resultIntent = new Intent();
             resultIntent.putExtra("data", person);
             setResult(2, resultIntent);

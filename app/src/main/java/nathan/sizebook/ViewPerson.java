@@ -56,27 +56,39 @@ public class ViewPerson extends AppCompatActivity{
 
         editNeck = (EditText) findViewById(R.id.edit_Neck);
         float neck = person.getNeck();
-        editNeck.setText(String.valueOf(neck));
+        if (neck != 0) {
+            editNeck.setText(String.format("%.1f", neck));
+        }
 
         editBust = (EditText) findViewById(R.id.edit_Bust);
         float bust = person.getBust();
-        editBust.setText(String.valueOf(bust));
+        if (bust != 0) {
+            editBust.setText(String.format("%.1f", bust));
+        }
 
         editChest = (EditText) findViewById(R.id.edit_Chest);
         float chest = person.getChest();
-        editChest.setText(String.valueOf(chest));
+        if (chest != 0) {
+            editChest.setText(String.format("%.1f", chest));
+        }
 
         editWaist = (EditText) findViewById(R.id.edit_Waist);
         float waist = person.getWaist();
-        editWaist.setText(String.valueOf(waist));
+        if (waist != 0) {
+            editWaist.setText(String.format("%.1f", waist));
+        }
 
         editHip = (EditText) findViewById(R.id.edit_Hip);
         float hip = person.getHip();
-        editHip.setText(String.valueOf(hip));
+        if (hip != 0) {
+            editHip.setText(String.format("%.1f", hip));
+        }
 
         editInseam = (EditText) findViewById(R.id.edit_Inseam);
         float inseam = person.getInseam();
-        editInseam.setText(String.valueOf(inseam));
+        if (inseam != 0) {
+            editInseam.setText(String.format("%.1f", inseam));
+        }
 
         editComment = (EditText) findViewById(R.id.edit_Comment);
         String comment = person.getComments();
@@ -178,7 +190,7 @@ public class ViewPerson extends AppCompatActivity{
             try {
                 Date date = check.parse(userDate);
 
-                person = new Person(userName, userDate, userNeck, userBust, userWaist, userChest, userHip, userInseam, Comments);
+                person = new Person(userName, userDate, userNeck, userBust, userChest, userWaist, userHip, userInseam, Comments);
                 int position = (int) b.getSerializable("pos");
 
                 Intent resultIntent = new Intent();
@@ -199,7 +211,7 @@ public class ViewPerson extends AppCompatActivity{
             return;
         }
         else {
-            Person person = new Person(userName, userDate, userNeck, userBust, userWaist, userChest, userHip, userInseam, Comments);
+            person = new Person(userName, userDate, userNeck, userBust, userChest, userWaist, userHip, userInseam, Comments);
             Intent resultIntent = new Intent();
             resultIntent.putExtra("data", person);
 
