@@ -10,14 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="nathan.sizebook.Main">
 
-    <ListView
-        android:id="@+id/oldpersonList"
-        android:layout_width="fill_parent"
-        android:layout_height="263dp"
-        android:layout_weight="1"
-        android:scrollbars="vertical">
-    </ListView>
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/newEntry"
         android:layout_width="wrap_content"
@@ -34,5 +26,25 @@
         android:onClick="newEntry"
 
         app:backgroundTint="@android:color/white" />
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/newEntry"
+        android:layout_alignEnd="@+id/newEntry" />
+
+    <ListView
+        android:id="@+id/oldpersonList"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        android:layout_above="@+id/newEntry"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="13dp">
+    </ListView>
 
 </RelativeLayout>

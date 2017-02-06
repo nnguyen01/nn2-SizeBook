@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,11 +29,11 @@ import java.util.ArrayList;
 public class Main extends AppCompatActivity {
 
     private static final String FILENAME = "file.sav";
+    public static final int CONFIRM = 1;
+    public static final int DELETE = 0;
     private ArrayList<Person> personList;
     private ArrayAdapter<Person> adapter;
     private ListView oldpersonList;
-    public static final int CONFIRM = 1;
-    public static final int DELETE = 0;
 
     /**
      * Starts the app and initializes a listview
@@ -79,13 +80,18 @@ public class Main extends AppCompatActivity {
     /**
      * When the user completes and activity, onStart
      * is used to reload the person entries and set the
-     * adapter.
+     * adapter, also adds a header showing the number of
+     * entries currently present.
      */
     @Override
     protected void onStart() {
         super.onStart();
 
         loadFromFile();
+
+        TextView textview = (TextView) findViewById(R.id.count);
+
+        textview.setText("Number of Entries: " + Integer.toString(personList.size()));
 
         adapter = new ArrayAdapter<Person>(this,
                 R.layout.list_person, R.id.list, personList);
