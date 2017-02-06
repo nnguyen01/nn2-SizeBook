@@ -29,8 +29,8 @@ import java.util.ArrayList;
 public class Main extends AppCompatActivity {
 
     private static final String FILENAME = "file.sav";
-    public static final int CONFIRM = 1;
-    public static final int DELETE = 0;
+    public static final int CONFIRM = 2;
+    public static final int DELETE = 1;
     private ArrayList<Person> personList;
     private ArrayAdapter<Person> adapter;
     private ListView oldpersonList;
@@ -135,7 +135,7 @@ public class Main extends AppCompatActivity {
 
                 saveInFile();
             }
-            if (resultCode == DELETE) {
+            else if (resultCode == DELETE) {
                 Bundle b = data.getExtras();
 
                 int position = (int) b.getSerializable("pos");
@@ -145,6 +145,7 @@ public class Main extends AppCompatActivity {
 
                 saveInFile();
             }
+            else if (resultCode == RESULT_CANCELED) {}
         }
     }
 

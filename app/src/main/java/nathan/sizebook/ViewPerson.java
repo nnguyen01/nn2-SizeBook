@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * The same as GetData in which it opens up a menu where
@@ -90,7 +91,7 @@ public class ViewPerson extends AppCompatActivity{
         int position = (int) b.getSerializable("pos");
 
         resultIntent.putExtra("pos", position);
-        setResult(0, resultIntent);
+        setResult(1, resultIntent);
         finish();
     }
 
@@ -105,25 +106,80 @@ public class ViewPerson extends AppCompatActivity{
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-
+        boolean flag;
+        flag = false;
         String Name = editName.getText().toString();
         String Date = editDate.getText().toString();
-        float Neck = Float.valueOf(editNeck.getText().toString());
-        float Bust = Float.valueOf(editBust.getText().toString());
-        float Chest = Float.valueOf(editChest.getText().toString());
-        float Waist = Float.valueOf(editWaist.getText().toString());
-        float Hip = Float.valueOf(editHip.getText().toString());
-        float Inseam = Float.valueOf(editInseam.getText().toString());
+
+        System.out.println(Name);
+
+        // Instantiates all values so that
+        // person object is valid
+        float Bust = 0;
+        float Neck = 0;
+        float Chest = 0;
+        float Waist = 0;
+        float Hip = 0;
+        float Inseam = 0;
+
+        try { Neck = Float.valueOf(editNeck.getText().toString()); }
+        catch (NumberFormatException e) {
+            if (editNeck.getText().toString().isEmpty()) {}
+            else {flag = true;}
+        };
+
+        try { Bust = Float.valueOf(editBust.getText().toString()); }
+        catch (NumberFormatException e) {
+            if (editBust.getText().toString().isEmpty()) {}
+            else {flag = true;}
+        };
+
+        try { Chest = Float.valueOf(editChest.getText().toString()); }
+        catch (NumberFormatException e) {
+            if (editChest.getText().toString().isEmpty()) {}
+            else {flag = true;}
+        };
+
+        try { Waist = Float.valueOf(editWaist.getText().toString()); }
+        catch (NumberFormatException e) {
+            if (editWaist.getText().toString().isEmpty()) {}
+            else {flag = true;}
+        };
+
+        try { Hip = Float.valueOf(editHip.getText().toString()); }
+        catch (NumberFormatException e) {
+            if (editHip.getText().toString().isEmpty()) {}
+            else {flag = true;}
+        };
+
+        try { Inseam = Float.valueOf(editInseam.getText().toString()); }
+        catch (NumberFormatException e) {
+            if (editInseam.getText().toString().isEmpty()) {}
+            else {flag = true;}
+        };
+
         String Comments = editComment.getText().toString();
 
-        Person person = new Person(Name, Date, Neck, Bust, Waist, Chest, Hip, Inseam, Comments);
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra("data", person);
+        if (Name.isEmpty()) {
+            TextView textview = (TextView) findViewById(R.id.invalid);
+            textview.setText("Invalid Name");
+            return;
+        }
+        else if (flag) {
+            TextView textview = (TextView) findViewById(R.id.invalid);
+            textview.setText("Invalid Entry");
+            return;
+        }
+        else {
+            Person person = new Person(Name, Date, Neck, Bust, Waist, Chest, Hip, Inseam, Comments);
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("data", person);
 
-        int position = (int) b.getSerializable("pos");
+            int position = (int) b.getSerializable("pos");
 
-        resultIntent.putExtra("pos", position);
-        setResult(1, resultIntent);
-        finish();
+            resultIntent.putExtra("pos", position);
+            setResult(2, resultIntent);
+            finish();
+        }
     }
 }

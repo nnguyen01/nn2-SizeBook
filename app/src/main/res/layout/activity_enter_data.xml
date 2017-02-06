@@ -79,6 +79,14 @@
         android:layout_below="@id/edit_Comment"
         android:hint="@string/enterComment"/>
 
+    <TextView
+        android:id="@+id/invalid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000"
+        android:layout_alignRight="@+id/newEntry"
+        android:layout_alignEnd="@+id/newEntry" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -44,6 +44,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="30dp"
+        android:clickable="true"
         android:layout_marginBottom="13dp">
     </ListView>
 
