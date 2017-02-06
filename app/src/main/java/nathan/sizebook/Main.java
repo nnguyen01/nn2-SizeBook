@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -26,7 +25,7 @@ import java.util.ArrayList;
 public class Main extends AppCompatActivity {
 
     private static final String FILENAME = "file.sav";
-    private ArrayList<Person> personList = new ArrayList<Person>();
+    private ArrayList<Person> personList;
     private ArrayAdapter<Person> adapter;
     private ListView oldpersonList;
 
@@ -44,6 +43,19 @@ public class Main extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
+    public void seeData(View view) {
+
+        ListView viewList = (ListView) view.getParent();
+
+        int position = viewList.getPositionForView(view);
+        Person person = personList.get(position);
+
+        Intent intent = new Intent(this, ViewPerson.class);
+        intent.putExtra("pos", position);
+        intent.putExtra("selected", person);
+        startActivityForResult(intent, 2);
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -53,7 +65,6 @@ public class Main extends AppCompatActivity {
         adapter = new ArrayAdapter<Person>(this,
                 R.layout.list_person, R.id.list, personList);
 
-
         oldpersonList.setAdapter(adapter);
     }
 
@@ -62,9 +73,23 @@ public class Main extends AppCompatActivity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 Bundle b = data.getExtras();
+
                 Person person = (Person) b.getSerializable("data");
 
                 personList.add(person);
+                adapter.notifyDataSetChanged();
+
+                saveInFile();
+            }
+        }
+        if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                Bundle b = data.getExtras();
+
+                Person person = (Person) b.getSerializable("data");
+                int position = (int) b.getSerializable("pos");
+
+                personList.set(position, person);
                 adapter.notifyDataSetChanged();
 
                 saveInFile();
@@ -79,23 +104,12 @@ public class Main extends AppCompatActivity {
 
             Gson gson = new Gson();
 
-            // Taken from http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt
-            // 2017-01-24 18:19
             Type listType = new TypeToken<ArrayList<Person>>(){}.getType();
             personList = gson.fromJson(in, listType);
-
-            //Log.d("tag", personList.get(0));
-
-            Log.d("tag", personList.toString());
-            //Log.d("tag", "hello");
-
 
         } catch (FileNotFoundException e) {
             personList = new ArrayList<Person>();
             // TODO Handle the Exception later
-        } catch (IOException e) {
-            // TODO Handle the Exception later
-            throw new RuntimeException();
         }
     }
 

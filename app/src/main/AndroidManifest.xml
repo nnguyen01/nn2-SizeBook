@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".GetData"></activity>
+        <activity android:name=".ViewPerson"></activity>
     </application>
 
 </manifest>

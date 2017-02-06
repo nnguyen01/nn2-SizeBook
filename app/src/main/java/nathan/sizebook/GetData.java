@@ -13,6 +13,7 @@ public class GetData extends AppCompatActivity {
     EditText userNeckText;
     EditText userBustText;
     EditText userChestText;
+    EditText userWaistText;
     EditText userHipText;
     EditText userInseamText;
     EditText userCommentText;
@@ -27,6 +28,7 @@ public class GetData extends AppCompatActivity {
         userNeckText = (EditText) findViewById(R.id.edit_Neck);
         userBustText = (EditText) findViewById(R.id.edit_Bust);
         userChestText = (EditText) findViewById(R.id.edit_Chest);
+        userWaistText = (EditText) findViewById(R.id.edit_Waist);
         userHipText = (EditText) findViewById(R.id.edit_Hip);
         userInseamText = (EditText) findViewById(R.id.edit_Inseam);
         userCommentText = (EditText) findViewById(R.id.edit_Comment);
@@ -38,16 +40,15 @@ public class GetData extends AppCompatActivity {
         float Neck = Float.valueOf(userNeckText.getText().toString());
         float Bust = Float.valueOf(userBustText.getText().toString());
         float Chest = Float.valueOf(userChestText.getText().toString());
+        float Waist = Float.valueOf(userWaistText.getText().toString());
         float Hip = Float.valueOf(userHipText.getText().toString());
         float Inseam = Float.valueOf(userInseamText.getText().toString());
         String Comments = userCommentText.getText().toString();
 
-        person = new Person(Name, Date, Neck, Bust, Chest, Hip, Inseam, Comments);
+        person = new Person(Name, Date, Neck, Bust, Waist, Chest, Hip, Inseam, Comments);
         Intent resultIntent = new Intent();
         resultIntent.putExtra("data", person);
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
-        //Intent intent = new Intent(this, Main.class);
-        //startActivity(intent);
     }
 }
