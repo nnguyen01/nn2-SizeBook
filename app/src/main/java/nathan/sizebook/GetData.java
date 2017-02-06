@@ -51,6 +51,7 @@ public class GetData extends AppCompatActivity {
      * Makes a person object and passes the object to main.
      * Sets the result code to 1 so that onActivityResult knows
      * it was successful.
+     * Handles date and entry verification.
      * @param view
      */
     public void confirmButton(View view) {

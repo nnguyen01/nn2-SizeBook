@@ -117,6 +117,7 @@ public class ViewPerson extends AppCompatActivity{
      * GetData except this also returns the position of
      * the entry clicked on so that it can replace the data
      * without making a new entry.
+     * Handles date validation and entry validation
      * @param view
      */
     public void confirmButton(View view) {
